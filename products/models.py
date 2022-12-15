@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 
 # Create your models here.
@@ -27,3 +28,13 @@ class Product(models.Model):  # описание продукта
 
     def __str__(self):  # магический метод
         return f'{self.name} | {self.category.name}'
+
+
+class Basket(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE) # если продукт удалится - удалится и корзина
+    quantity = models.PositiveIntegerField(default=0)
+    created_temestamp = models.DateTimeField(auto_now_add=True)  # отслеживание появления нового объекта
+
+    def __str__(self):
+        return f'Корзина для {self.user.username} | Продукт {self.product.name}'
