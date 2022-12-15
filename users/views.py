@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
-from django.contrib import auth
+from django.contrib import auth, messages
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
@@ -26,6 +26,7 @@ def register(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()  # сохраняются данные в базе
+            messages.success(request, 'Вы успешно зарегестрировались!')
             return HttpResponseRedirect(reverse('users:login'))  # возвращает на страницу авторизации
     else:
         form = UserRegistrationForm()
@@ -45,3 +46,7 @@ def profile(request):  # request содержит информацию по по
             instance=request.user)  # работа с определённым объектом (пользователем, под которым мы авторизовались)
     context = {'form': form}
     return render(request, 'users/profile.html', context)
+
+def logout(request):
+    auth.logout(request)
+    return  HttpResponseRedirect(reverse('index'))
