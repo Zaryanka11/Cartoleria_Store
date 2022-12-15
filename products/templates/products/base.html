@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static%}
 
 <head>
 
@@ -35,10 +36,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
+                    <a class="nav-link" href="{% url 'users:profile' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="auth/profile.html">Аделя Ф.
+                    <a class="nav-link" href="{% url 'users.profile' %}">Аделя Ф.
                         <i class="fas fa-user-circle"></i>
                     </a>
                 </li>
