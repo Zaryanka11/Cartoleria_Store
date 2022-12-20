@@ -40,7 +40,7 @@ def register(request):
 def profile(request):  # request содержит информацию по пользователе
     user = request.user
     if request.method == 'POST':
-        form = UserProfileForm(data=request.POST, files=request.FILES, instance=request.user)  # чтобы пользователь мог обновлять информацию о себе
+        form = UserProfileForm(data=request.POST, files=request.FILES, instance=user)  # чтобы пользователь мог обновлять информацию о себе
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('users:profile'))

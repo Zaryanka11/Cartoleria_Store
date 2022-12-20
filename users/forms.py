@@ -40,7 +40,7 @@ class UserRegistrationForm(UserCreationForm):
 class UserProfileForm(UserChangeForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'readonly': True}))  # данные нельзя редактировать, только чтение
     email = forms.CharField(widget=forms.EmailInput(attrs={'readonly': True}))  # данные нельзя редактировать, только чтение
-    image = forms.ImageField(widget=forms.FileInput(), required=False) # required изображение - не обязательное условие
+    image = forms.ImageField(widget=forms.FileInput(),required=False) # required изображение - не обязательное условие
 
     class Meta:
         model = User
