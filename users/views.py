@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib import auth, messages
 
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from products.models import Basket
 
 
 def login(request):  # логика авторизации
@@ -35,16 +36,19 @@ def register(request):
 
 
 def profile(request):  # request содержит информацию по пользователе
+    user = request.user
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST, files=request.FILES,
-                               instance=request.user)  # чтобы пользователь мог обновлять информацию о себе
+                               instance=user)  # чтобы пользователь мог обновлять информацию о себе
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('users:profile'))
     else:
         form = UserProfileForm(
-            instance=request.user)  # работа с определённым объектом (пользователем, под которым мы авторизовались)
-    context = {'form': form}
+            instance=user)  # работа с определённым объектом (пользователем, под которым мы авторизовались)
+    context = {'form': form, 'tittle': 'Store - Личный кабинет',
+               'baskets': Basket.objects.filter(user=user),
+               }
     return render(request, 'users/profile.html', context)
 
 def logout(request):
