@@ -32,7 +32,7 @@ class Product(models.Model):  # описание продукта
 
 class Basket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE) # если продукт удалится - удалится и корзина
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)  # если продукт удалится - удалится и корзина
     quantity = models.PositiveIntegerField(default=0)
     created_temestamp = models.DateTimeField(auto_now_add=True)  # отслеживание появления нового объекта
 
