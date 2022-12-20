@@ -38,10 +38,8 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserProfileForm(UserChangeForm):
-    username = forms.CharField(
-        widget=forms.TextInput(attrs={'readonly': True}))  # данные нельзя редактировать, только чтение
-    email = forms.CharField(
-        widget=forms.EmailInput(attrs={'readonly': True}))  # данные нельзя редактировать, только чтение
+    username = forms.CharField(widget=forms.TextInput(attrs={'readonly': True}))  # данные нельзя редактировать, только чтение
+    email = forms.CharField(widget=forms.EmailInput(attrs={'readonly': True}))  # данные нельзя редактировать, только чтение
     image = forms.ImageField(widget=forms.FileInput(), required=False) # required изображение - не обязательное условие
 
     class Meta:
@@ -54,3 +52,4 @@ class UserProfileForm(UserChangeForm):
         for field_name, filed in self.fields.items():
             filed.widget.attrs['class'] = 'form-control py-4'
         self.fields['image'].widget.attrs['class'] = 'custom-file-input' # переопределение метода для image
+
