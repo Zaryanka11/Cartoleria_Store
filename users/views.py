@@ -29,7 +29,7 @@ def register(request):
         if form.is_valid():
             form.save()  # сохраняются данные в базе
             messages.success(request, 'Вы успешно зарегестрировались!')
-            return HttpResponseRedirect(reverse('users:login'))  # возвращает на страницу авторизации
+            return HttpResponseRedirect(reverse('users:login'))  # возврат на страницу авторизации
     else:
         form = UserRegistrationForm()
     context = {'form': form}
